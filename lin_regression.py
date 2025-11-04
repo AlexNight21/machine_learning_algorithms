@@ -7,7 +7,7 @@ class MyLineReg():
         self.learning_rate = learning_rate
         self.weights = None
         
-    def fit(self, X: pd.DataFrame, y: pd.Series, verbose=False):
+    def fit(self, X: pd.DataFrame, y: pd.Series, verbose=False) -> None:
         num_feat = len(X.columns)    # number of features
         num_calc = len(X)            # number of observations
         X.insert(0, 'w0', 1)
@@ -22,6 +22,13 @@ class MyLineReg():
                 if i == 0:
                     iter_info = "start"
                 print(f"{iter_info} | loss: {loss_val}")
+    
+    def predict(self, X: pd.DataFrame,):
+        '''Predict results by linear regression model'''
+        X.insert(0, 'w0', 1)
+        y_pred = X @ self.weights
+        return sum(y_pred)
+        
         
     def get_coef(self):
         return self.weights[1:]
